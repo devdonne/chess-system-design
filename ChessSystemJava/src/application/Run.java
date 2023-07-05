@@ -1,28 +1,39 @@
 package application;
 
 import chess.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Run {
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         ChessMatch chessMatch = new ChessMatch();
-        
-        while (true){
-            UI.printBoard(chessMatch.getPieces());
-            
-            System.out.println("");
-            
-            System.out.println("Source:");
-            ChessPosition source = UI.readChessPosition(new Scanner(System.in));
-            
-            System.out.println("");
-            System.out.println("Target: ");
-            
-            ChessPosition target = UI.readChessPosition(new Scanner(System.in));
-            
-            ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            try {
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces());
+
+                System.out.println("");
+
+                System.out.println("Source:");
+                ChessPosition source = UI.readChessPosition(sc);
+
+                System.out.println("");
+                System.out.println("Target: ");
+
+                ChessPosition target = UI.readChessPosition(sc);
+
+                ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+            } catch (ChessException | InputMismatchException e) {
+                System.out.println(e.getMessage());
+                System.out.println("");
+                System.out.println("Write anything and press Enter to continue");
+                sc.next();
+            }
         }
-        
-        
+
     }
 }
