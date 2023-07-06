@@ -1,4 +1,4 @@
-package application;
+    package application;
 
 import chess.*;
 import java.util.InputMismatchException;
