@@ -1,5 +1,6 @@
-    package application;
+package application;
 
+import boardgame.Position;
 import chess.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -14,7 +15,7 @@ public class Run {
 
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while (!chessMatch.getCheckMate()) {
             try {
                 UI.clearScreen();
                 UI.printMatch(chessMatch, captured);
@@ -23,9 +24,9 @@ public class Run {
 
                 System.out.println("Source:");
                 ChessPosition source = UI.readChessPosition(sc);
-                
+
                 boolean[][] possibleMoves = chessMatch.possibleMoves(source);
-                
+
                 UI.clearScreen();
                 UI.printBoard(chessMatch.getPieces(), possibleMoves);
 
@@ -35,17 +36,18 @@ public class Run {
                 ChessPosition target = UI.readChessPosition(sc);
 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
-                
-                if (capturedPiece != null){
+
+                if (capturedPiece != null) {
                     captured.add(capturedPiece);
                 }
-            } catch (ChessException | InputMismatchException e) {
+            } catch (ChessException | InputMismatchException | IllegalStateException e) {
                 System.out.println(e.getMessage());
                 System.out.println("");
                 System.out.println("Write anything and press Enter to continue");
                 sc.next();
             }
         }
-
+        UI.clearScreen();
+        UI.printMatch(chessMatch, captured);
     }
 }
