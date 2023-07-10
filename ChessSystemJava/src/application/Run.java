@@ -1,6 +1,5 @@
 package application;
 
-import boardgame.Position;
 import chess.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
