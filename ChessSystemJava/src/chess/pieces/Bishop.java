@@ -34,7 +34,7 @@ public class Bishop extends ChessPiece {
         return mat;
     }
 
-    public void colorPossibleMoves(Position p, boolean[][] mat, int row, int column) {
+    private void colorPossibleMoves(Position p, boolean[][] mat, int row, int column) {
         p.setValues(position.getRow() + row, position.getColumn() + column);
 
         while (getBoard().positionExists(p) && !getBoard().thereisAPiece(p)) {
