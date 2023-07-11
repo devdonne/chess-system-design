@@ -41,7 +41,7 @@ public class Run {
                 }
             } catch (ChessException | InputMismatchException | IllegalStateException e) {
                 System.out.println(e.getMessage());
-                System.out.println("");
+                System.out.println();
                 System.out.println("Write anything and press Enter to continue");
                 sc.next();
             }
