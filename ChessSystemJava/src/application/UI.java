@@ -41,11 +41,16 @@ public class UI {
         try {
             String s = sc.next();
 
-            char column = s.charAt(0);
+            if (s.equals("CANCEL")) {
+                return null;
+            } else {
 
-            int row = Integer.parseInt(s.substring(1));
+                char column = s.charAt(0);
 
-            return new ChessPosition(column, row);
+                int row = Integer.parseInt(s.substring(1));
+
+                return new ChessPosition(column, row);
+            }
         } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
         }
@@ -57,6 +62,7 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println();
+        System.out.println("Write \"CANCEL\" to come back the last played.");
         System.out.println("Turn: " + chessMatch.getTurn());
         if (!chessMatch.getCheckMate()) {
             System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());

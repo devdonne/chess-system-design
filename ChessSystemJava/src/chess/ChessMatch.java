@@ -4,6 +4,7 @@ import boardgame.*;
 import chess.pieces.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class ChessMatch {
@@ -15,6 +16,7 @@ public class ChessMatch {
     private boolean checkMate;
     private ChessPiece enPassantVulnarable;
     private ChessPiece promoted;
+    private Stack<Played> played = new Stack<>();
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
 
@@ -47,6 +49,27 @@ public class ChessMatch {
 
     public Color getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public Stack<Played> getPlayed() {
+        return played;
+    }
+
+    public void undoPlayed() {
+        
+        if (played.isEmpty()){
+            throw new ChessException("No played yet");
+        }
+        
+        Played lastPlayed = played.pop();
+
+        undoMove(lastPlayed.getSource(), lastPlayed.getTarget(), lastPlayed.getCapturedPiece());
+        
+        turn --;
+        
+        currentPlayer = opponent(currentPlayer);
+        
+       // System.out.println("Source : "+  lastPlayed.getSource() + "\nTarget:" + lastPlayed.getTarget() + "\nCaptured Piece" + lastPlayed.getCapturedPiece());
     }
 
     public ChessPiece[][] getPieces() {
@@ -108,6 +131,8 @@ public class ChessMatch {
         } else {
             enPassantVulnarable = null;
         }
+
+        played.add(new Played(source, target, this, capturedPiece));
 
         return (ChessPiece) capturedPiece;
     }

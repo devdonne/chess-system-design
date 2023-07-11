@@ -24,31 +24,37 @@ public class Run {
                 System.out.println("Source:");
                 ChessPosition source = UI.readChessPosition(sc);
 
-                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                if (source == null) {
+                    chessMatch.undoPlayed();
+                } else {
 
-                UI.clearScreen();
-                UI.printBoard(chessMatch.getPieces(), possibleMoves);
+                    boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 
-                System.out.println("");
-                System.out.println("Target: ");
+                    UI.clearScreen();
+                    UI.printBoard(chessMatch.getPieces(), possibleMoves);
 
-                ChessPosition target = UI.readChessPosition(sc);
+                    System.out.println("");
+                    System.out.println("Target: ");
 
-                ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+                    ChessPosition target = UI.readChessPosition(sc);
 
-                if (capturedPiece != null) {
-                    captured.add(capturedPiece);
-                }
+                    ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 
-                if (chessMatch.getPromoted() != null) {
-                    System.out.println("Enter piece for promotion (B/N/R/Q): ");
-                    String type = sc.next().toUpperCase();
-                    while (!type.equals("N") && !type.equals("B") && !type.equals("R") && !type.equals("Q")) {
-                        System.out.println("Invalid value: Enter piece for promotion (B/N/R/Q): ");
-                        type = sc.next().toUpperCase();
+                    if (capturedPiece != null) {
+                        captured.add(capturedPiece);
                     }
 
-                    chessMatch.replacePromotedPiece(type);
+                    if (chessMatch.getPromoted() != null) {
+                        System.out.println("Enter piece for promotion (B/N/R/Q): ");
+                        String type = sc.next().toUpperCase();
+
+                        while (!type.equals("N") && !type.equals("B") && !type.equals("R") && !type.equals("Q")) {
+                            System.out.println("Invalid value: Enter piece for promotion (B/N/R/Q): ");
+                            type = sc.next().toUpperCase();
+                        }
+
+                        chessMatch.replacePromotedPiece(type);
+                    }
                 }
             } catch (ChessException | InputMismatchException | IllegalStateException e) {
                 System.out.println(e.getMessage());
