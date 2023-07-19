@@ -130,11 +130,11 @@ public class UI {
 
         System.out.println("Captured pieces:");
         System.out.print("White: ");
-        System.out.print(ANSI_WHITE);
+        System.out.print(ANSI_BLUE);
         System.out.print(Arrays.toString(white.toArray()));
         System.out.println(ANSI_RESET);
         System.out.print("Black: ");
-        System.out.print(ANSI_YELLOW);
+        System.out.print(ANSI_RED);
         System.out.print(Arrays.toString(black.toArray()));
         System.out.println(ANSI_RESET);
     }
