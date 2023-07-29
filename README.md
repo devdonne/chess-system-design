@@ -36,5 +36,5 @@ $ java application/Run
 
 
 
-<h2 id="video"> 🚀 Instalando o projeto</h2>
+<h2 id="video"> 🚀 Video Tutorial</h2>
 👉 [Link do video do meu canal sobre o projeto](https://youtu.be/iG3tccs0Arw)
