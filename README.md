@@ -34,7 +34,6 @@ $ java application/Run
 <p>Escolha o Target (destino) com a letra da coluna e o numero da linha, por exemplo: d4</p>
 <p>Para cancelar a jogada apenas escreva "CANCEL" no Source (origem)</p>
 
-
-
 <h2 id="video"> 🚀 Video Tutorial</h2>
+
 👉 [Link do video do meu canal sobre o projeto](https://youtu.be/iG3tccs0Arw)
